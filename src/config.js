@@ -12,46 +12,47 @@ connect.then(() => {
 
 // Create the user schema
 const Loginschema = new mongoose.Schema({
-    email: {
+    name: {
         type: String,
-        required: true
-    },
-    password: {
+        required: [true, 'Email is required'],
+      },
+      password: {
         type: String,
-        //required: true
-    },
+        required: [true, 'Password is required'],
+      },
 
     firstName: {
         type: String,
-        required: true
+        required: false
     },
     lastName: {
         type: String,
-        required: true
+        required: false
     },
     phoneNumber: {
         type: String,
-        required: true,
+        required: false,
         match: [/^\d{10}$/, 'Please fill a valid 10-digit phone number']  
     },
     age: {
         type: Number,
-        required: true,
+        required: false,
         min: 0  
     },
     gender: {
         type: String,
         enum: ['Male', 'Female', 'Other'], 
-        required: true
+        required: false
     },
     state: {
         type: String,
-        required: true
+        required: false
     },
     school: {
         type: String,
-        required: true
+        required: false
     }
+    
 });
 
 

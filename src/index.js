@@ -7,8 +7,13 @@ const cors = require('cors');
 const app = express();
 
 app.use(express.json());
-app.use(cors({ credentials: true }));
+app.use(cors({
+    origin: 'http://localhost:3001', // Your frontend's URL
+    credentials: true // Allow credentials like cookies
+}));
+
 app.use(express.urlencoded({ extended: false }));
+
 
 // Global variable to store the logged-in user's email
 let loggedInEmail = null;
@@ -70,7 +75,7 @@ app.post('/api/submit-data', async (req, res) => {
 
   // Log request body for debuggig
   console.log("Received Data:", req.body);
-
+  
   // Check if email matches the logged-in email
   if (email !== loggedInEmail) {
     return res.status(400).json({ error: 'Please use the email you used to login.' });
@@ -102,12 +107,13 @@ app.post('/api/submit-data', async (req, res) => {
 
 app.get("/api/profile", async (req, res) => {
     console.log("Profile endpoint ");
+    console.log('Logged in user email:', loggedInEmail);
     if (!loggedInEmail) {
         return res.status(401).json({ message: "User not logged in." });
     }
 
     try {
-        const userProfile = await collection.findOne({ email: loggedInEmail }); // Ensure you are checking by email
+        const userProfile = await collection.findOne({ name: loggedInEmail }); // Ensure you are checking by email
         if (!userProfile) {
             return res.status(404).json({ message: "User not found." });
         }
@@ -118,6 +124,7 @@ app.get("/api/profile", async (req, res) => {
         res.status(500).json({ message: "Internal server error." });
     }
 });
+
 
 
   
