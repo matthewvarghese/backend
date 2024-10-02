@@ -10,7 +10,6 @@ connect.then(() => {
     console.error("Database connection error:", err);
 });
 
-// Create the user schema
 const Loginschema = new mongoose.Schema({
     name: {
         type: String,
@@ -56,7 +55,6 @@ const Loginschema = new mongoose.Schema({
 });
 
 
-// Create the user model based on the schema
 const collection = mongoose.model("users", Loginschema);
 
 module.exports = collection
