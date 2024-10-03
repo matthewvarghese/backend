@@ -8,7 +8,7 @@ const app = express();
 
 app.use(express.json());
 app.use(cors({
-    origin: 'http://localhost:3001', 
+    origin: 'https://teal-fenglisu-217183.netlify.app', 
     credentials: true 
 }));
 
