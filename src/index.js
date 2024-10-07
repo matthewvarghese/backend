@@ -3,12 +3,14 @@ const path = require("path");
 const collection = require("./config");
 const bcrypt = require('bcrypt');
 const cors = require('cors');
+const stripe = require('stripe')('sk_test_51Q4W3pJg8Ivon8W3M3jS7fV29OjadfbrH1SzpbcROGLAQpz6lFoEvJzn8HGE7K5mcCkgeVgq4L2fChxl9nHME70E00AEucZaYM');
 
 const app = express();
+app.use(express.static('public'));
 
 app.use(express.json());
 app.use(cors({
-    origin: 'https://teal-fenglisu-217183.netlify.app', 
+    origin: 'http://localhost:3001', 
     credentials: true 
 }));
 
@@ -111,9 +113,59 @@ app.get("/api/profile", async (req, res) => {
     }
 });
 
-
-
+app.post('/create-checkout-session', async (req, res) => {
+    try {
+      const session = await stripe.checkout.sessions.create({
+        line_items: [
+          {
+            price_data: {
+              currency: 'usd',
+              product_data: {
+                name: 'T-shirt',
+              },
+              unit_amount: 2000,
+            },
+            quantity: 1,
+          },
+        ],
+        mode: 'payment',
+        success_url: 'http://localhost:3000/success.html',
+        cancel_url: 'http://localhost:3000/cancel.html',
+      });
   
+      res.redirect(303, session.url);
+    } catch (error) {
+      console.error(error);
+      res.status(500).send('Internal Server Error');
+    }
+  });
+
+  app.get('/test', (req, res) => {
+    res.send('Server is working!');
+  });
+
+  app.get('/api/products', async (req, res) => {
+    try {
+        const products = await stripe.products.list();
+        const prices = await stripe.prices.list();
+        
+        const productsWithPrices = products.data.map(product => {
+            const price = prices.data.find(price => price.product === product.id);
+            return {
+                id: product.id,
+                name: product.name,
+                image: product.images[0], 
+                price: price.unit_amount, 
+            };
+        });
+
+        res.json(productsWithPrices);
+    } catch (error) {
+        console.error(error);
+        res.status(500).send('Error fetching products');
+    }
+});
+
   // Start the server
   const port = 3000;
   app.listen(port, () => {
