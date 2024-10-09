@@ -10,7 +10,7 @@ app.use(express.static('public'));
 
 app.use(express.json());
 app.use(cors({
-    origin: 'https://e00a-206-81-12-171.ngrok-free.app', 
+    origin: 'https://artemis-shopping.netlify.app', 
     credentials: true 
 }));
 
@@ -136,7 +136,6 @@ app.post('/create-checkout-session', async (req, res) => {
             currency: "usd",
           },
           display_name: "Free shipping",
-          // Delivers between 5-7 business days
           delivery_estimate: {
             minimum: {
               unit: "business_day",
@@ -180,8 +179,8 @@ app.post('/create-checkout-session', async (req, res) => {
                 },
             ],
             mode: 'payment',
-            success_url: 'https://teal-fenglisu-217183.netlify.app/success.html',
-            cancel_url:  'https://teal-fenglisu-217183.netlify.app/cancel.html',
+            success_url: 'http://localhost:3000/success.html',
+            cancel_url: 'http://localhost:3000/cancel.html',
         });
 
         res.json({ url: session.url }); 
@@ -217,6 +216,9 @@ app.post('/create-checkout-session', async (req, res) => {
     }
 });
 
-app.listen(port, '0.0.0.0', () => {
-    console.log(`Server listening on port ${port}`);
-});
+  // Start the server
+  const port = 3001;
+  app.listen(port, () => {
+      console.log(`Server listening on port ${port}`);
+  });
+  
