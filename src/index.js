@@ -10,7 +10,7 @@ app.use(express.static('public'));
 
 app.use(express.json());
 app.use(cors({
-    origin: 'https://teal-fenglisu-217183.netlify.app', 
+    origin: 'https://335b-206-81-12-171.ngrok-free.app', 
     credentials: true 
 }));
 
