@@ -10,7 +10,7 @@ app.use(express.static('public'));
 
 app.use(express.json());
 app.use(cors({
-    origin: 'http://localhost:3001', 
+    origin: 'https://teal-fenglisu-217183.netlify.app', 
     credentials: true 
 }));
 
@@ -180,8 +180,8 @@ app.post('/create-checkout-session', async (req, res) => {
                 },
             ],
             mode: 'payment',
-            success_url: 'http://localhost:3000/success.html',
-            cancel_url: 'http://localhost:3000/cancel.html',
+            success_url: 'https://teal-fenglisu-217183.netlify.app/success.html',
+            cancel_url: 'https://teal-fenglisu-217183.netlify.app/cancel.html',
         });
 
         res.json({ url: session.url }); 
