@@ -219,8 +219,7 @@ app.post('/create-checkout-session', async (req, res) => {
 
 app.options('*', cors()); 
   // Start the server
-  const port = 3001;
-  app.listen(port, () => {
-      console.log(`Server listening on port ${port}`);
-  });
+  const port = process.env.PORT || 3000;
+app.listen(port, () => console.log(`Server running on port ${port}`));
+
   
