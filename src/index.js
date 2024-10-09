@@ -181,7 +181,7 @@ app.post('/create-checkout-session', async (req, res) => {
             ],
             mode: 'payment',
             success_url: 'https://teal-fenglisu-217183.netlify.app/success.html',
-            cancel_url: 'https://teal-fenglisu-217183.netlify.app/cancel.html',
+            cancel_url:  'https://teal-fenglisu-217183.netlify.app/cancel.html',
         });
 
         res.json({ url: session.url }); 
@@ -217,9 +217,6 @@ app.post('/create-checkout-session', async (req, res) => {
     }
 });
 
-  // Start the server
-  const port = 3000;
-  app.listen(port, () => {
-      console.log(`Server listening on port ${port}`);
-  });
-  
+app.listen(port, '0.0.0.0', () => {
+    console.log(`Server listening on port ${port}`);
+});
