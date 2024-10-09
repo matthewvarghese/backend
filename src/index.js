@@ -4,6 +4,7 @@ const collection = require("./config");
 const bcrypt = require('bcrypt');
 const cors = require('cors');
 const stripe = require('stripe')('sk_test_51Q4W3pJg8Ivon8W3M3jS7fV29OjadfbrH1SzpbcROGLAQpz6lFoEvJzn8HGE7K5mcCkgeVgq4L2fChxl9nHME70E00AEucZaYM');
+app.options('*', cors()); 
 
 const app = express();
 app.use(express.static('public'));
