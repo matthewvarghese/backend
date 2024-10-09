@@ -1,7 +1,9 @@
 const express = require("express");
 const path = require("path");
 const collection = require("./src/config");
-const bcrypt = require('bcrypt');
+
+const bcrypt = require('bcryptjs');
+
 const cors = require('cors');
 const stripe = require('stripe')('sk_test_51Q4W3pJg8Ivon8W3M3jS7fV29OjadfbrH1SzpbcROGLAQpz6lFoEvJzn8HGE7K5mcCkgeVgq4L2fChxl9nHME70E00AEucZaYM');
 
