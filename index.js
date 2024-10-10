@@ -182,8 +182,8 @@ app.post('/create-checkout-session', async (req, res) => {
                 },
             ],
             mode: 'payment',
-            success_url: 'http://localhost:3000/success.html',
-            cancel_url: 'http://localhost:3000/cancel.html',
+            success_url: 'https://artemis-shopping.netlify.app/success.html',
+            cancel_url: 'https://artemis-shopping.netlify.app/cancel.html',
         });
 
         res.json({ url: session.url }); 
